@@ -4,25 +4,38 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class SignupPage {
-    private final WebDriver driver;
-
+    WebDriver driver;
     public SignupPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    private final By nameInput = By.name("name");
-    private final By emailInput = By.xpath("//input[@data-qa='signup-email']");
-    private final By signupButton = By.xpath("//button[contains(text(),'Signup')]");
+    public void enterSignupNameEmail(String name, String email) {
+        try {
+            driver.findElement(By.name("name")).sendKeys(name);
+            driver.findElement(By.cssSelector("input[data-qa='signup-email']")).sendKeys(email);
+        } catch (Exception e) {
+            System.out.println("Signup form error: " + e.getMessage());
+        }
+    }
+
+    public void clickSignupButton() {
+        driver.findElement(By.cssSelector("button[data-qa='signup-button']")).click();
+    }
+
+    public void enterLoginEmailPassword(String email, String password) {
+        driver.findElement(By.name("email")).sendKeys(email);
+        driver.findElement(By.name("password")).sendKeys(password);
+    }
+
+    public void clickLoginButton() {
+        driver.findElement(By.cssSelector("button[data-qa='login-button']")).click();
+    }
 
     public void enterName(String name) {
-        driver.findElement(nameInput).sendKeys(name);
+        driver.findElement(By.name("name")).sendKeys(name);
     }
 
     public void enterEmail(String email) {
-        driver.findElement(emailInput).sendKeys(email);
-    }
-
-    public void clickSignup() {
-        driver.findElement(signupButton).click();
+        driver.findElement(By.cssSelector("input[data-qa='signup-email']")).sendKeys(email);
     }
 }
