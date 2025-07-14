@@ -31,9 +31,6 @@ public class ContactUsPage {
     @FindBy(name = "message")
     private WebElement messageField;
 
-    @FindBy(name = "upload_file")
-    private WebElement uploadFileInput;
-
     @FindBy(name = "submit")
     private WebElement submitButton;
 
@@ -43,17 +40,11 @@ public class ContactUsPage {
     @FindBy(xpath = "//a[@class='btn btn-success']")
     private WebElement homeButton;
 
-    // ===== Actions =====
-
     public void fillContactForm(String name, String email, String subject, String message) {
         wait.waitForVisibility(nameField).sendKeys(name);
         emailField.sendKeys(email);
         subjectField.sendKeys(subject);
         messageField.sendKeys(message);
-    }
-
-    public void uploadFile(String filePath) {
-        wait.waitForVisibility(uploadFileInput).sendKeys(filePath);
     }
 
     public void clickSubmit() {
@@ -65,7 +56,6 @@ public class ContactUsPage {
             Alert alert = driver.switchTo().alert();
             alert.accept();
         } catch (Exception e) {
-            // Handle no alert
             System.out.println("No alert found.");
         }
     }

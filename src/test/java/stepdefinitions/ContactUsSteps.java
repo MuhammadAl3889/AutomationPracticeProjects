@@ -23,11 +23,6 @@ public class ContactUsSteps {
         contactUsPage.fillContactForm("Syed Ali", "syed.ali@example.com", "Automation Inquiry", "Please contact me regarding automation services.");
     }
 
-    @When("User uploads a file")
-    public void user_uploads_a_file() {
-        contactUsPage.uploadFile(System.getProperty("user.dir") + "/src/test/resources/testData/sample.txt");
-    }
-
     @When("User clicks the Submit button")
     public void user_clicks_submit_button() {
         contactUsPage.clickSubmit();
