@@ -11,7 +11,7 @@ public class TestCasesPage {
     private WebDriver driver;
     private WaitUtils wait;
 
-    @FindBy(id = "testCasesHeader")
+    @FindBy(xpath = "//h2[contains(text(),'Test Cases')]")
     private WebElement testCasesHeader;
 
     public TestCasesPage(WebDriver driver) {
@@ -20,7 +20,7 @@ public class TestCasesPage {
         this.wait = new WaitUtils(driver, Integer.parseInt(ConfigReader.get("explicitWait")));
     }
 
-    public boolean isTestCasesPageVisible() {
+    public boolean isTestCasesContentVisible() {
         return wait.waitForVisibility(testCasesHeader).isDisplayed();
     }
 }

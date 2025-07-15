@@ -31,7 +31,10 @@ public class ContactUsSteps {
 
     @Then("A success message {string} should be displayed")
     public void success_message_should_be_displayed(String expectedMessage) {
-        Assert.assertTrue(contactUsPage.getSuccessMessage().contains(expectedMessage));
+        String actualMessage = contactUsPage.getSuccessMessage();
+        System.out.println("Actual success message: " + actualMessage);
+        Assert.assertTrue(actualMessage.contains(expectedMessage),
+                "Expected message not found! Expected: " + expectedMessage + " but was: " + actualMessage);
     }
 
     @When("User clicks the Home button")
@@ -41,6 +44,7 @@ public class ContactUsSteps {
 
     @Then("User should be redirected to the Home page")
     public void user_should_be_redirected_to_home_page() {
-        Assert.assertTrue(driver.getCurrentUrl().equalsIgnoreCase("https://automationexercise.com/"));
+        Assert.assertEquals(driver.getCurrentUrl(), "https://automationexercise.com/",
+                "User was not redirected to the Home page.");
     }
 }

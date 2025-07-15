@@ -5,8 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.ConfigReader;
 import utilities.WaitUtils;
+
+import java.time.Duration;
 
 public class ContactUsPage {
 
@@ -34,7 +38,7 @@ public class ContactUsPage {
     @FindBy(name = "submit")
     private WebElement submitButton;
 
-    @FindBy(xpath = "//div[@class='status alert alert-success']")
+    @FindBy(xpath = "//div[contains(@class,'alert-success')]")
     private WebElement successMessage;
 
     @FindBy(xpath = "//a[@class='btn btn-success']")
@@ -53,10 +57,13 @@ public class ContactUsPage {
 
     public void acceptAlert() {
         try {
+            new WebDriverWait(driver, Duration.ofSeconds(5))
+                    .until(ExpectedConditions.alertIsPresent());
             Alert alert = driver.switchTo().alert();
             alert.accept();
+            System.out.println("Alert accepted.");
         } catch (Exception e) {
-            System.out.println("No alert found.");
+            System.out.println("No alert found or failed to accept alert.");
         }
     }
 
